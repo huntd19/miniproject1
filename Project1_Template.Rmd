@@ -11,14 +11,27 @@ knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
 ```{r}
 # load packages and read in your data. 
 library(tidyverse)
-#DatasetName <- read_csv("name_of_file.csv")
-#head(DatasetName)  #Remove the first # to display this for your proposal. Don't display in your final report. 
+library(mdsr)
+NCAA_Financials <- read_csv("pubDataRepo.csv")
+head(NCAA_Financials)  #Remove the first # to display this for your proposal. Don't display in your final report. 
 ```
 
 Type introductory paragraph here. 
 
 ```{r, fig.height=4, fig.width=6}
-# create graphic here. Feel free to change fig.height and fig.width, as needed.
+NCAA <- NCAA_Financials %>% group_by(state) %>% summarize(avgsub=mean(subsidy),avgendow=mean(endowments),avgtvrev=mean(tv_revenue),avgathexp=mean(athletic_expenses),avgticket=mean(ticket_sales))
+
+ggplot(data=NCAA, aes(x=state)) +
+  geom_bar(mapping=aes(x=fct_reorder(.f=state, .x=avgsub, .desc=TRUE), y=avgsub/1000000), stat = "identity",fill="lightblue") + xlab("State") + ylab("Average Subsidy in Millions") + theme(axis.text.x = element_text(angle = 90)) +
+  geom_line(mapping=aes(y=avgendow/1000000),color="green")
+
+```
+```{r}
+NCAA <- NCAA_Financials %>% group_by(conference) %>% summarize(avgsub=mean(subsidy),avgendow=mean(endowments),avgtvrev=mean(tv_revenue),avgathexp=mean(athletic_expenses),avgticket=mean(ticket_sales))
+
+ggplot(data=NCAA, aes(x=conference)) +
+  geom_bar(mapping=aes(x=fct_reorder(.f=conference, .x=avgsub, .desc=TRUE), y=avgsub/1000000), stat = "identity",fill="lightblue") + xlab("State") + ylab("Average Subsidy in Millions") + theme(axis.text.x = element_text(angle = 90)) +
+  geom_line(mapping=aes(y=avgendow/1000000),color="green")
 ```
 
 Type 2-3 paragraphs here, explaining the information conveyed in the graphic. 
