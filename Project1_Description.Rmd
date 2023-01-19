@@ -1,0 +1,120 @@
+---
+title: "Data-Scientific Programming: Project 1 Description"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Task
+
+Write a short blog post, educating readers on a topic of your choosing. Central to your post should be a graphic you created, visualizing data in a creative and informative way.   
+
+Your post should include an introductory paragraph, explaining the background and context of your data, followed by your graphic, and then 2-3 paragraphs explaining the conclusions we should draw from the graphic. The post should be 300-400 words long. It should reveal interesting and non-obvious information about your topic of choice. 
+
+Your graphic should be of complexity similar to those in Section 1.3 of the Class notes. It should go beyond the basic graphics introduced in Sections 1.1 and 1.2, though you are encouraged to use those kinds of graphics as a starting point and add to them as you go. Think carefully about what kind of graphic is most appropriate for your data, and how to use aesthetics like color, size, faceting, etc. to visualize your data in a compelling way. Avoid over-complicating your graphic to the point that it becomes confusing and hard to read.   
+
+Although it might be tempting to try to create more than one graphic for your blog post, don't do this! Create a single graphic that is as compelling and interesting as possible.  
+
+Your goal should be to create a new and compelling graphic for your data, rather than to reproduce a graph that has already been created on the same data.   
+
+**The purpose of this mini-project is to demonstrate your ability to visualize data in a creative and informative manner, and to explain your conclusions. Since the project is intended to measure what you have learned, it must be completed without help from anyone else. Do not discuss the project with, or get help from classmates, tutors, other students, or anyone else, other than the instructor. Giving or receiving unauthorized assistance will be considered an honor code violation.**
+
+## Writing the report
+
+* Use the project 1 template on GitHub.    
+* If working with a .csv or other kind of datafile, upload it into your Posit Cloud project. See the * "Reading Data into R" on Canvas for steps on how to do this.   
+* Be sure to give the blog post an informative title.    
+* Commit and push your work to GitHub as you go.     
+* Submit to Canvas a .html file, knitted via RMarkdown.   
+* As you work, make and push at least 5 GitHub commits  with descriptive commit messages   
+* Include a link to your data. If you cite any sources in your article, use APA format, though sources other than the link to the data are not required.   
+
+
+## Examples
+
+Examples of excellent projects from past years are available on Canvas.  
+
+Below are some additional examples of interesting blog posts, centered around graphics. While these are longer and contain more graphics than yours will, they will give you an idea of the kind of information you should try to convey. 
+
+* [How to tell Someone's Age when All You Know is Her Name](https://fivethirtyeight.com/features/how-to-tell-someones-age-when-all-you-know-is-her-name/)    
+
+* [A Better Way To Find The Best Flights And Avoid The Worst Airports](https://fivethirtyeight.com/features/fastest-airlines-fastest-airports/)    
+
+* [NYC Taxis and Uber](https://toddwschneider.com/posts/analyzing-1-1-billion-nyc-taxi-and-uber-trips-with-a-vengeance/)    
+
+* [Data on people who went to ER for wall-punching](https://flowingdata.com/2016/01/14/data-on-people-who-wall-punching/)    
+
+For more examples of interesting graphs, see the R Graphics Gallery (https://r-graph-gallery.com/), Chapter 7 of [R For Data Science](https://r4ds.had.co.nz), and Chapters 2 and 3 of [Modern Data Science with R](https://beanumber.github.io/mdsr2e/). 
+
+
+### Due Dates:
+
+* Proposal and read in data by Friday, January 13   
+* Report Due: Friday, January 20 
+
+There will be a 5-point penalty for each day the project is late, except in the case of a valid excuse, approved by the instructor ahead of time.    
+
+
+## Finding a Dataset    
+
+Below are several places where you might find data. If you have other ideas for data you would like to use, feel free to do so.  
+
+Pay attention to the format of your data. The variables you want to display on the x or y axis, and using color, size, etc. should appear as columns in your dataset. (This is an attribute of a dataset that is in `tidy` form, which we'll talk about soon.)   
+
+* [Gapminder](https://www.gapminder.org/data/) - Datasets on world countries. Lots of social/economic data.     
+
+* [Kaggle](https://www.kaggle.com/datasets) - Lots of different datasets. You will need to create a free account to download the data     
+
+* [Sports Reference](https://www.sports-reference.com/) - data on professional and college sports     
+
+* [fivethirtyeight.com](https://data.fivethirtyeight.com/) - data on politics and lots of other topics    
+
+* [data.world](https://data.world/) - You will need to create a free account to download the data     
+
+* [Covid-19 Data](https://github.com/CSSEGISandData/COVID-19/tree/master/csse_covid_19_data)
+
+* [NASA Data](https://data.nasa.gov/) and [More NASA Data](https://pds.nasa.gov/)
+
+* [Google sheet with more links](https://docs.google.com/spreadsheets/d/1wZhPLMCHKJvwOkP4juclhjFgqIY8fQFMemwKL2c64vk/edit#gid=0)      
+
+
+## Grading    
+
+An excellent project should include:    
+
+1. a graphic that:  
+ * shows a level of complexity similar to those in Section 1.3 of the notes and the blog posts referenced above.    
+ * make stylistic choices (positioning, color, size, shape, faceting, etc.) appropriate for the type of variable(s) being displayed.   
+ * is clear, neatly labeled and appropriately-sized, with a title and axis labels.    
+ 
+ 2. a 300-400 word discussion that:    
+ * contains an informative title and an introductory paragraph that provides background information about the topic.   
+ * uses the graphic to tell a compelling and informative story. The reader should feel that they learned something new and interesting.   
+ * flows like a short journal article, or professional blog post, and is free of typos and spelling/grammar errors.   
+
+Points and letter grades will be assigned as follows. (Note: 2 points will be deducted if there are fewer than 5 GitHub commits, or link to data source is not provide.)
+
+**A (47-50 points)** - all six of the above criteria are fully satisfied.   
+
+**B+ to A- (44-46 points)** - all six criteria are mostly satisfied, with room for small improvements.  
+
+**B (42-43 points)** - five of the criteria are satisfied, while the sixth is partially satisfied, and in need of improvement.    
+
+**C+ to B- (39-41 points)** - five of the criteria are mostly satisfied, with room for small improvements, while the sixth is partially satisfied and in need of improvement.  
+
+**C (37-38 points)** - four of the criteria are satisfied. The other two are partially satisfied and in need of improvement.    
+
+**D+ to C- (34-36 points)** - four of the criteria are mostly satisfied with room for small improvements. The other two are partially satisfied and in need of improvement.   
+
+**D (32-33 points)** - three of the criteria are satisfied, while the other three are partially satisfied or in need of improvement, OR four of the criteria are satisfied and the others are substantially lacking.   
+
+**D- (30-31 points)** - three of the criteria are mostly satisfied with room for small improvement, while the other three are partially satisfied or in need of improvement, OR four of the criteria are mostly satisfied and the others are substantially lacking.   
+
+**F (20-29 points)** - at least two of the criteria are satisfied and at least two others are partially satisfied.    
+
+**F (10-19 points)** - at least one of the criteria are satisfied and at least 3 others are partially satisfied.   
+
+**F (0-9 points)** - none of the criteria are satisfied. Typically this will occur if the graph and/or discussion is missing entirely or shows extremely little thought and effort.   
+
