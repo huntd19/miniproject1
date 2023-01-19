@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
 library(tidyverse)
 library(mdsr)
 NCAA_Financials <- read_csv("pubDataRepo.csv")
-head(NCAA_Financials)  #Remove the first # to display this for your proposal. Don't display in your final report. 
+#head(NCAA_Financials)  #Remove the first # to display this for your proposal. Don't display in your final report. 
 ```
 
 Type introductory paragraph here. 
@@ -29,9 +29,15 @@ ggplot(data=NCAA, aes(x=state)) +
 ```{r}
 NCAA <- NCAA_Financials %>% group_by(conference) %>% summarize(avgsub=mean(subsidy),avgendow=mean(endowments),avgtvrev=mean(tv_revenue),avgathexp=mean(athletic_expenses),avgticket=mean(ticket_sales))
 
+NCAA <- arrange(NCAA,desc(avgsub),by_group = FALSE)
+
+confnum <- 1:28
+
+NCAA <- cbind(NCAA,confnum)
+
 ggplot(data=NCAA, aes(x=conference)) +
   geom_bar(mapping=aes(x=fct_reorder(.f=conference, .x=avgsub, .desc=TRUE), y=avgsub/1000000), stat = "identity",fill="lightblue") + xlab("State") + ylab("Average Subsidy in Millions") + theme(axis.text.x = element_text(angle = 90)) +
-  geom_line(mapping=aes(y=avgendow/1000000),color="green")
+  geom_line(mapping=aes(y=avgathexp/1000000,x=confnum),color="black") + geom_point(mapping=aes(y=avgathexp/1000000,x=conference))
 ```
 
 Type 2-3 paragraphs here, explaining the information conveyed in the graphic. 
