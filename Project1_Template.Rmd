@@ -1,6 +1,6 @@
 ---
-title: "Project Title"
-author: "Your Name"
+title: "Can Colleges Afford to Pay Their Players?"
+author: "Dylan Hunt"
 output: html_document
 ---
 
@@ -12,32 +12,32 @@ knitr::opts_chunk$set(echo = FALSE, message=FALSE, warning=FALSE)
 # load packages and read in your data. 
 library(tidyverse)
 library(mdsr)
+library(dplyr)
+library(ggplot2)
 NCAA_Financials <- read_csv("pubDataRepo.csv")
 #head(NCAA_Financials)  #Remove the first # to display this for your proposal. Don't display in your final report. 
 ```
 
-Type introductory paragraph here. 
+  Do colleges have the money to pay their players? This question has become very relevant in collegiate sports today. Some universities are bringing in almost 100 million dollars in revenue these days. Some argue that because players are bringing in this money, they should get paid more than their scholarships. Currently, athletes can sign name image and likeness (NLI) deals, but colleges cannot directly pay athletes. So, athletes can sell themselves for marketing to companies or individuals, but they are not seeing any of the revenue they are bringing in. The Huffington Post collected data on the economics of college athletics. Their data was from 28 division one conferences from 2010 to 2014. This article will discuss how this data from The Huffington Post gives a glimpse into an answer to this question.
 
-```{r, fig.height=4, fig.width=6}
-NCAA <- NCAA_Financials %>% group_by(state) %>% summarize(avgsub=mean(subsidy),avgendow=mean(endowments),avgtvrev=mean(tv_revenue),avgathexp=mean(athletic_expenses),avgticket=mean(ticket_sales))
+```{r, fig.height=8, fig.width=10}
+NCAA <- NCAA_Financials %>% group_by(conference) %>% summarize(avgsub=mean(inflation_adjusted_subsidy),avgendow=mean(inflation_adjusted_endowments), avgathexp=mean(inflation_adjusted_athletic_expenses),avgticket=mean(ticket_sales),avgathrev=mean(inflation_adjusted_athletic_revenues), avgnetrev=mean(inflation_adjusted_net_revenue), avgenroll=mean(full_time_enrollment))
 
-ggplot(data=NCAA, aes(x=state)) +
-  geom_bar(mapping=aes(x=fct_reorder(.f=state, .x=avgsub, .desc=TRUE), y=avgsub/1000000), stat = "identity",fill="lightblue") + xlab("State") + ylab("Average Subsidy in Millions") + theme(axis.text.x = element_text(angle = 90)) +
-  geom_line(mapping=aes(y=avgendow/1000000),color="green")
-
-```
-```{r}
-NCAA <- NCAA_Financials %>% group_by(conference) %>% summarize(avgsub=mean(subsidy),avgendow=mean(endowments),avgtvrev=mean(tv_revenue),avgathexp=mean(athletic_expenses),avgticket=mean(ticket_sales))
-
-NCAA <- arrange(NCAA,desc(avgsub),by_group = FALSE)
+NCAA <- arrange(NCAA,desc(avgathrev),by_group = FALSE)
 
 confnum <- 1:28
 
 NCAA <- cbind(NCAA,confnum)
 
+NCAA$conference <- factor(NCAA$conference, levels = c("Southeastern Conference","Big Ten Conference", "Big 12 Conference","Atlantic Coast Conference","Pacific-12 Conference","American Athletic Conference","Mountain West Conference","Mid-American Conference","Conference USA","Atlantic 10 Conference","Big West Conference","Colonial Athletic Association","America East Conference","Missouri Valley Conference","Sun Belt Conference","Western Athletic Conference","Big Sky Conference","Northeast Conference","Southern Conference","Independent","The Summit League","Horizon League","Ohio Valley Conference","Southland Conference","Atlantic Sun Conference","Big South Conference","Mid-Eastern Athletic Conference","Southwestern Athletic Conference"), labels= c("SEC","Big 10","Big 12","ACC","Pac-12","American","Mountain West","Mid-American","Conference USA","Atlantic 10","Big West","Colonial","America East","Missouri Valley","Sun Belt","Western","Big Sky","Northeast","Southern","Independent","Summit League","Horizon","Ohio Valley","Southland","Atlantic Sun","Big South","Mid-Eastern","Southwestern"))
+
+NCAA <- mutate(NCAA,Power_Five=ifelse((conference =="SEC"|conference=="Big 10"|conference=="Big 12"|conference=="ACC"|conference=="Pac-12"),T,F))
+
 ggplot(data=NCAA, aes(x=conference)) +
-  geom_bar(mapping=aes(x=fct_reorder(.f=conference, .x=avgsub, .desc=TRUE), y=avgsub/1000000), stat = "identity",fill="lightblue") + xlab("State") + ylab("Average Subsidy in Millions") + theme(axis.text.x = element_text(angle = 90)) +
-  geom_line(mapping=aes(y=avgathexp/1000000,x=confnum),color="black") + geom_point(mapping=aes(y=avgathexp/1000000,x=conference))
+  geom_bar(mapping=aes(x=fct_reorder(.f=conference, .x=avgathrev/1000000, .desc=TRUE), y=avgathrev/1000000, fill=Power_Five), stat = "identity") + xlab("Conference") + ylab("Millions of Dollars") + ggtitle("Different Conferences Average Revenue vs. Average Expenses") + theme(axis.text.x = element_text(angle = 90),legend.position = "none") + scale_fill_manual(values = c('#00FF00', '#009900')) + geom_line(mapping=aes(y=avgathexp/1000000,x=confnum),color="red", size=2) +
+geom_point(mapping=aes(y=avgathexp/1000000,x=confnum),color="red") +
+geom_curve(x="Atlantic 10", xend="American", y=75, yend=50, arrow=arrow(length=unit(0.3, "cm")), curvature=0.5, color="#993300") + geom_text(x="America East",y=75,label="Average Expences", color="#993300") + geom_curve(x="Pac-12", xend="Big 12", y=93, yend=95, arrow=arrow(length=unit(0.3, "cm")), curvature=0.5,color="#009900") + geom_text(x="Mountain West",y=90, label="Power 5 Conferences", color="#009900") +
+geom_curve(x="Big Sky", xend="Missouri Valley", y=40, yend=5, arrow=arrow(length=unit(0.3, "cm")), curvature=0.5,color="#003300") + geom_text(x="Independent",y=40, label="Average Revenue", color="#003300")
 ```
 
 Type 2-3 paragraphs here, explaining the information conveyed in the graphic. 
